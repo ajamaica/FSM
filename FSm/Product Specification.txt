@@ -1,0 +1,153 @@
+
+=== Sustraction Symbol ===
+
+-  // Operación
+-= // Asignación
+-- // Asignación
+-> // Apuntadores
+
+=== Plus Symbol ===
+
++  // Operación
++= // Asignación
+++ // Asignación
+
+=== Diagonal Symbol ===
+
+/  // Operación
+/* // Comentario
+// // Comentario
+/= // Asignacion
+
+=== Star Symbol ===
+
+*  // Operación
+*/ // Comentario
+*= // Asignacion
+*ID
+
+=== > Symbol ===
+
+>  // Operación Logica
+>> // Asignacion
+>>= // Asignacion
+>= // Operación Logica
+%> // Agrupación
+:> // Agrupación
+
+
+=== < Symbol ===
+
+<  // Operación Logica
+<< // Asignacion
+<<= // Asignacion
+<= // Operación Logica
+<% // Agrupación
+<: // Agrupacion
+<ID
+
+
+=== = Symbol ===
+
+=  // Asignacion
+== // Logico
+
+=== ! Symbol ===
+
+!  // Asignación
+!= // Lógico
+
+=== ~ Symbol ===
+
+~ID // Destructor
+
+
+=== | Symbol ===
+
+| // Operacion
+|= // Asignacion
+|| // Lógico
+
+
+=== & Symbol ===
+
+& // Operacion
+&& // Lógico
+&ID // Referencia
+
+=== % Symbol ===
+
+% // Operación
+%= // Asignación
+%ID // Referencia
+
+=== . Symbol ===
+
+... // Elipsis
+.   // Reference
+
+
+=== [, ], {,} Symbol ===
+
+[,].{,} // Agrupacion
+
+=== ; Symbol ===
+
+; // Puntuación
+
+
+=== ^ Symbol ===
+
+^ // Lógico
+^= // Asignacion
+
+=== ? Symbol ===
+
+? // IF
+
+=== , Symbol ===
+
+, // Puntuacion
+
+=== : Symbol ===
+
+: // Else
+
+ === IDENTIFICADORES ===
+ 
+[A-Za-z]+[A-Za-z0-9]*
+ 
+ - Palabras Reservadas -
+ 
+"auto"			AUTO
+"break"			BREAK
+"case"			CASE
+"char"			CHAR
+"const"			CONST
+"continue"		CONTINUE
+"default"		DEFAULT
+"do"			DO
+"double"		DOUBLE
+"else"			ELSE
+"enum"			ENUM
+"extern"		EXTERN
+"float"			FLOAT
+"for"			FOR
+"goto"			GOTO
+"if"			IF
+"int"			INT
+"long"			LONG
+"register"		REGISTER
+"return"		RETURN
+"short"			SHORT
+"signed"		SIGNED
+"sizeof"		SIZEOF
+"static"		STATIC
+"struct"		STRUCT
+"switch"		SWITCH
+"typedef"		TYPEDEF
+"union"			UNION
+"unsigned"		UNSIGNED
+"void"			VOID
+"volatile"		VOLATILE
+"while"			WHILE

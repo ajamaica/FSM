@@ -61,6 +61,7 @@ char *term;    /* out: the token text if the token is a term */
         
         if ( EOF == (next_ch = getc(stream)) ) next_ch = '\0';
         
+        
         term[i++] = convert_case[next_ch];
         
         switch( state )
@@ -110,7 +111,7 @@ char *term;    /* out: the token text if the token is a term */
 
                 case PERCENTAGE_CH :  state = 16; break;
                     
-                case COMA_CH :  state = 17; break;
+                case COMMA_CH :  state = 17; break;
 
                 case SEMICOLON_CH :  state = 18; break;
                     
@@ -122,7 +123,7 @@ char *term;    /* out: the token text if the token is a term */
                     
                 case POINT_CH :  state = 23; break;
 
-                case QUOTETATION_CH :  state = 24; break;
+                case QUOTATION_CH :  state = 24; break;
 
 
                 default :           state =-8; break;
@@ -169,6 +170,7 @@ char *term;    /* out: the token text if the token is a term */
             break;  
                 
             case 10:
+                printf("%c", '-');
                 if ( HYPHENMINUS_CH != char_class[next_ch]) {
                     
                     
