@@ -1,5 +1,7 @@
 #import <stdio.h>
 
+// Proyecto Teoría de la Computación
+
 typedef enum {
     
     WHITE_CH,             /* whitespace  */
