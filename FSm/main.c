@@ -3,7 +3,6 @@
 
 typedef enum {
     
-    
     WHITE_CH,             /* whitespace  */
     
     DIGIT_CH,             /*  digits */
