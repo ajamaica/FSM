@@ -48,12 +48,14 @@ char *term;    /* out: the token text if the token is a term */
     
     int i;        /* for scanning through the term buffer */
     
-    
+    int p;
     /* Part 1: Run a state machine on the input */
     
     state = 0;
     
     i = 0;
+    
+    p = 0;
     
     while ( 0  <= state )
         
@@ -78,7 +80,7 @@ char *term;    /* out: the token text if the token is a term */
                 case WHITE_CH :     i = 0; break;
                     
                 case LETTER_CH :    state =  1; break;
-                    
+                                        
                 case LFT_PAREN_CH : state = -2; break;
                     
                 case RGT_PAREN_CH : state = -3; break;
@@ -91,7 +93,7 @@ char *term;    /* out: the token text if the token is a term */
                     
                 case EOS_CH :       state = -7; break;
                     
-                case DIGIT_CH :     state = 1; break;
+                case DIGIT_CH :     state = 25; break;
                     
                 case OTHER_CH :   term[i] = '\0';   state = -8; break;
                     
@@ -124,6 +126,7 @@ char *term;    /* out: the token text if the token is a term */
                 case POINT_CH :  state = 23; break;
 
                 case QUOTATION_CH :  state = 24; break;
+                    
 
 
                 default :           state =-8; break;
@@ -134,6 +137,8 @@ char *term;    /* out: the token text if the token is a term */
                 
                 
             case 1 :
+                
+                
                 
                 if ( (DIGIT_CH != char_class[next_ch])
                     
@@ -147,11 +152,13 @@ char *term;    /* out: the token text if the token is a term */
                     
                     state = -1;
                     
+                    
+                    
                 }
                 
-                break;
                 
-            
+                break;
+
                 
             case 9:
                 if ( ADDITION_CH != char_class[next_ch]) 
@@ -168,8 +175,9 @@ char *term;    /* out: the token text if the token is a term */
             break;  
                 
             case 10:
+
                 if ( HYPHENMINUS_CH != char_class[next_ch]) {
-                    
+
                     
                     term[i] = '\0';
                     state = -10;
@@ -183,20 +191,74 @@ char *term;    /* out: the token text if the token is a term */
                 break;
                 
             case 11:
+
                 
                 term[i] = '\0';
                 state = -11;
             break;
                 
             case 12:
-                printf("%c", '/');
             break;
                 
             case 13:
-                printf("%c", '<');
             break;
                 
-            default :state = -8; break;
+                
+            case 23:
+                if ( (DIGIT_CH != char_class[next_ch]) ){
+                    
+                    ungetc( next_ch, stream );
+
+                    term[i-1] = '\0';
+                    state = 26;
+                }else if( (POINT_CH == char_class[next_ch])){
+
+                    
+                }
+            break;
+                
+                
+            case 25:                
+                if ( (DIGIT_CH != char_class[next_ch]) && ((POINT_CH != char_class[next_ch])))
+                    
+                {
+                    ungetc( next_ch, stream );
+                    
+                    term[i-1] = '\0';
+                    
+                    state = -25;
+                    
+                    
+                    
+                }
+                
+                if ((POINT_CH == char_class[next_ch])) {
+                    state = 26;
+                }
+                
+                
+                
+            break;
+                
+            case 26:
+                
+                
+                
+                if ( (DIGIT_CH != char_class[next_ch]) )
+                    
+                {
+                    
+                    
+                    ungetc( next_ch, stream );
+                    
+                    term[i-1] = '\0';
+                    
+                    state = -26;
+                    
+                }
+            break;
+                
+            default : state = -8; break;
             
                 
                 
@@ -266,6 +328,16 @@ int main(int argc, char **argv, char **envp){
                     printf("\n %s : ID", term);
                 }
             
+                
+            break;
+                
+            case DIGIT_TOKEN:
+                //printf("\n %s : NUMERO", term);
+
+            break;
+                
+            case DIGIT_POINT_TOKEN:
+                printf("\n %s : NUMERO", term);
                 
             break;
                 

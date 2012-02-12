@@ -307,6 +307,11 @@ typedef enum {
     SUSTRACTION_TOKEN = 10, /* - */
     
     ASIGNATION_TOKEN = 11, /* - */
+    
+    DIGIT_TOKEN      = 25,    /* a search term */
+    
+    DIGIT_POINT_TOKEN      = 26,    /* a search term */
+
 
     
     
