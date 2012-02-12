@@ -30,6 +30,7 @@
 		06B2521C14E7802B0066C1B3 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		06B2521E14E7802B0066C1B3 /* FSm.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = FSm.1; sourceTree = "<group>"; };
 		06EADF4414E845D700BABBA5 /* File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = File.c; sourceTree = "<group>"; };
+		7ED0A64714E84A5E00DE7E0C /* header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = header.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 				06EADF4414E845D700BABBA5 /* File.c */,
 				06B2521C14E7802B0066C1B3 /* main.c */,
 				06B2521E14E7802B0066C1B3 /* FSm.1 */,
+				7ED0A64714E84A5E00DE7E0C /* header.h */,
 			);
 			path = FSm;
 			sourceTree = "<group>";
