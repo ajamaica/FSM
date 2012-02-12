@@ -34,7 +34,7 @@
 
 static TokenType
 
-GetToken( stream, term ) 
+GetToken( stream, term )
 
 FILE *stream;  /* in: where to grab input characters */
 

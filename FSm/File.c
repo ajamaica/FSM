@@ -1,6 +1,5 @@
 
 int a, b;
-int funcion();
 
 int funcion(){
     while (a < b){
