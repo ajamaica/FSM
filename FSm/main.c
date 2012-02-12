@@ -140,7 +140,7 @@ char *term;    /* out: the token text if the token is a term */
             break;  
                 
             case 10:
-                if ( SUSTRACTION_CH != char_class[next_ch]) {
+                if ( HYPHENMINUS_CH != char_class[next_ch]) {
                     
                     
                     term[i] = '\0';
