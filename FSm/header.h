@@ -3,59 +3,67 @@
 
 typedef enum {
     
-    WHITE_CH,             /* whitespace  */
+    WHITE_CH,           /* whitespace  */
     
-    DIGIT_CH,             /*  digits */
+    DIGIT_CH,           /*  digits */
     
-    LETTER_CH,            /* letters */
+    LETTER_CH,          /* letters */
     
-    LFT_PAREN_CH,         /* ( */
+    LFT_PAREN_CH,       /* ( */
     
-    RGT_PAREN_CH,         /* ) */
+    RGT_PAREN_CH,       /* ) */
     
-    AMPERSAND_CH,         /* & */
+    LFT_CURLYBRACKET_CH,/* } */
     
-    HYPHENMINUS_CH,         /* - */
+    RGT_CURLYBRACKET_CH,/* { */
+    
+    LFT_SQRBRACKET_CH,  /* [ */
+    
+    RGT_SQRBRACKET_CH,  /* ] */
+    
+    AMPERSAND_CH,       /* & */
+    
+    HYPHENMINUS_CH,     /* - */
 
-    ADDITION_CH,         /* + */
+    ADDITION_CH,        /* + */
     
-    BAR_CH,               /* | */
+    STAR_CH,            /* * */
     
-    STAR_CH,               /* * */
-    
-    SLASH_CH,               /* / */
+    SLASH_CH,           /* / */
 
-    GT_CH,               /* < */
+    GT_CH,              /* < */
     
-    LT_CH,               /* > */
+    LT_CH,              /* > */
 
-    EQ_CH,               /* = */
+    EQ_CH,              /* = */
     
-    PERCENTAGE_CH,               /* % */
+    PERCENTAGE_CH,      /* % */
     
-    COMA_CH,               /* , */
+    COMMA_CH,           /* , */
     
-    SEMICOLON_CH,               /* ; */
+    SEMICOLON_CH,       /* ; */
 
-    COLON_CH,               /* : */
+    COLON_CH,           /* : */
     
-    TILDE_CH,               /* ~ */
+    TILDE_CH,           /* ~ */
     
-    PIPE_CH,               /* | */
+    PIPE_CH,            /* | */
     
-    EXCLAMATION_CH,               /* ! */
+    EXCLAMATION_CH,     /* ! */
     
-    NUMBER_CH,               /* # */
+    QUESTION_CH,        /* ? */
     
-    POINT_CH,               /* . */
+    NUMBERSIGN_CH,      /* # */
     
-    QUOTETATION_CH,               /* ""'' */
+    POINT_CH,           /* . */
+    
+    QUOTATION_CH,       /* ""'' */
 
-    CARET_CH,             /* ^ */
+    CARET_CH,           /* ^ */
     
-    EOS_CH,               /* \0 */
+    EOS_CH,             /* \0 */
     
-    OTHER_CH,             /* CATCH ALL THE STF */
+    OTHER_CH,           /* CATCH ALL THE STF */
     
     
 } CharClassType;
@@ -63,91 +71,93 @@ typedef enum {
 
 static CharClassType char_class[128] = {
     
-    /* ^@ */  EOS_CH,      /* ^A */  OTHER_CH,    /* ^B */  OTHER_CH,
+    /* ^@ */  EOS_CH,           /* ^A */  OTHER_CH,         /* ^B */  OTHER_CH,
     
-    /* ^C */  OTHER_CH,    /* ^D */  OTHER_CH,    /* ^E */  OTHER_CH,
+    /* ^C */  OTHER_CH,         /* ^D */  OTHER_CH,         /* ^E */  OTHER_CH,
     
-    /* ^F */  OTHER_CH,    /* ^G */  OTHER_CH,    /* ^H */  WHITE_CH,
+    /* ^F */  OTHER_CH,         /* ^G */  OTHER_CH,         /* ^H */  WHITE_CH,
     
-    /* ^I */  WHITE_CH,    /* ^J */  WHITE_CH,    /* ^K */  WHITE_CH,
+    /* ^I */  WHITE_CH,         /* ^J */  WHITE_CH,         /* ^K */  WHITE_CH,
     
-    /* ^L */  WHITE_CH,    /* ^M */  WHITE_CH,    /* ^N */  OTHER_CH,
+    /* ^L */  WHITE_CH,         /* ^M */  WHITE_CH,         /* ^N */  OTHER_CH,
     
-    /* ^O */  OTHER_CH,    /* ^P */  OTHER_CH,    /* ^Q */  OTHER_CH,
+    /* ^O */  OTHER_CH,         /* ^P */  OTHER_CH,         /* ^Q */  OTHER_CH,
     
-    /* ^R */  OTHER_CH,    /* ^S */  OTHER_CH,    /* ^T */  OTHER_CH,
+    /* ^R */  OTHER_CH,         /* ^S */  OTHER_CH,         /* ^T */  OTHER_CH,
     
-    /* ^U */  OTHER_CH,    /* ^V */  OTHER_CH,    /* ^W */  OTHER_CH,
+    /* ^U */  OTHER_CH,         /* ^V */  OTHER_CH,         /* ^W */  OTHER_CH,
     
-    /* ^X */  OTHER_CH,    /* ^Y */  OTHER_CH,    /* ^Z */  OTHER_CH,
+    /* ^X */  OTHER_CH,         /* ^Y */  OTHER_CH,         /* ^Z */  OTHER_CH,
     
-    /* ^[ */  OTHER_CH,    /* ^\ */  OTHER_CH,    /* ^] */  OTHER_CH,
+    /* ^[ */  OTHER_CH,         /* ^\ */  OTHER_CH,         /* ^] */  OTHER_CH,
     
-    /* ^^ */  OTHER_CH,    /* ^_ */  OTHER_CH,    /*    */  WHITE_CH,
+    /* ^^ */  OTHER_CH,         /* ^_ */  OTHER_CH,         /*    */  WHITE_CH,
     
-    /*  ! */  OTHER_CH,    /*  " */  QUOTETATION_CH,    /*  # */  NUMBER_CH,
+    /*  ! */  EXCLAMATION_CH,   /*  " */  QUOTATION_CH,     /*  # */  NUMBERSIGN_CH,
     
-    /*  $ */  OTHER_CH,    /*  % */  OTHER_CH,    /*  & */  AMPERSAND_CH,
+    /*  $ */  OTHER_CH,         /*  % */  PERCENTAGE_CH,    /*  & */  AMPERSAND_CH,
     
-    /*  ' */  QUOTETATION_CH,    /*  ( */  LFT_PAREN_CH, /*  ) */  RGT_PAREN_CH,
+    /*  ' */  QUOTATION_CH,     /*  ( */  LFT_PAREN_CH,     /*  ) */  RGT_PAREN_CH,
     
-    /*  * */  OTHER_CH,    /*  + */  ADDITION_CH,    /*  , */  OTHER_CH,
+    /*  * */  STAR_CH,          /*  + */  ADDITION_CH,      /*  , */  COMMA_CH,
     
-    /*  - */  HYPHENMINUS_CH,    /*  . */  OTHER_CH,    /*  / */  OTHER_CH,
+    /*  - */  HYPHENMINUS_CH,   /*  . */  POINT_CH,         /*  / */  SLASH_CH,
     
-    /*  0 */  DIGIT_CH,    /*  1 */  DIGIT_CH,    /*  2 */  DIGIT_CH,
+    /*  0 */  DIGIT_CH,         /*  1 */  DIGIT_CH,         /*  2 */  DIGIT_CH,
     
-    /*  3 */  DIGIT_CH,    /*  4 */  DIGIT_CH,    /*  5 */  DIGIT_CH,
+    /*  3 */  DIGIT_CH,         /*  4 */  DIGIT_CH,         /*  5 */  DIGIT_CH,
     
-    /*  6 */  DIGIT_CH,    /*  7 */  DIGIT_CH,    /*  8 */  DIGIT_CH,
+    /*  6 */  DIGIT_CH,         /*  7 */  DIGIT_CH,         /*  8 */  DIGIT_CH,
     
-    /*  9 */  DIGIT_CH,    /*  : */  OTHER_CH,    /*  ; */  OTHER_CH,
+    /*  9 */  DIGIT_CH,         /*  : */  COLON_CH,         /*  ; */  SEMICOLON_CH,
     
-    /*  < */  OTHER_CH,    /*  = */  OTHER_CH,    /*  > */  OTHER_CH,
+    /*  < */  LT_CH,            /*  = */  EQ_CH,            /*  > */  GT_CH,
     
-    /*  ? */  OTHER_CH,    /*  @ */  OTHER_CH,    /*  A */  LETTER_CH,
+    /*  ? */  QUESTION_CH,      /*  @ */  OTHER_CH,         /*  A */  LETTER_CH,
     
-    /*  B */  LETTER_CH,   /*  C */  LETTER_CH,   /*  D */  LETTER_CH,
+    /*  B */  LETTER_CH,        /*  C */  LETTER_CH,        /*  D */  LETTER_CH,
     
-    /*  E */  LETTER_CH,   /*  F */  LETTER_CH,   /*  G */  LETTER_CH,
+    /*  E */  LETTER_CH,        /*  F */  LETTER_CH,        /*  G */  LETTER_CH,
     
-    /*  H */  LETTER_CH,   /*  I */  LETTER_CH,   /*  J */  LETTER_CH,
+    /*  H */  LETTER_CH,        /*  I */  LETTER_CH,        /*  J */  LETTER_CH,
     
-    /*  K */  LETTER_CH,   /*  L */  LETTER_CH,   /*  M */  LETTER_CH,
+    /*  K */  LETTER_CH,        /*  L */  LETTER_CH,        /*  M */  LETTER_CH,
     
-    /*  N */  LETTER_CH,   /*  O */  LETTER_CH,   /*  P */  LETTER_CH,
+    /*  N */  LETTER_CH,        /*  O */  LETTER_CH,        /*  P */  LETTER_CH,
     
-    /*  Q */  LETTER_CH,   /*  R */  LETTER_CH,   /*  S */  LETTER_CH,
+    /*  Q */  LETTER_CH,        /*  R */  LETTER_CH,        /*  S */  LETTER_CH,
     
-    /*  T */  LETTER_CH,   /*  U */  LETTER_CH,   /*  V */  LETTER_CH,
+    /*  T */  LETTER_CH,        /*  U */  LETTER_CH,        /*  V */  LETTER_CH,
     
-    /*  W */  LETTER_CH,   /*  X */  LETTER_CH,   /*  Y */  LETTER_CH,
+    /*  W */  LETTER_CH,        /*  X */  LETTER_CH,        /*  Y */  LETTER_CH,
     
-    /*  Z */  LETTER_CH,   /*  [ */  OTHER_CH,    /*  \ */  OTHER_CH,
+    /*  Z */  LETTER_CH,        /*  [ */  LFT_SQRBRACKET_CH,/*  \ */  OTHER_CH,
     
-    /*  ] */  OTHER_CH,    /*  ^ */  CARET_CH,    /*  _ */  OTHER_CH,
+    /*  ] */  RGT_SQRBRACKET_CH,/*  ^ */  CARET_CH,         /*  _ */  OTHER_CH,
     
-    /*  ` */  OTHER_CH,    /*  a */  LETTER_CH,   /*  b */  LETTER_CH,
+    /*  ` */  OTHER_CH,         /*  a */  LETTER_CH,        /*  b */  LETTER_CH,
     
-    /*  c */  LETTER_CH,   /*  d */  LETTER_CH,   /*  e */  LETTER_CH,
+    /*  c */  LETTER_CH,        /*  d */  LETTER_CH,        /*  e */  LETTER_CH,
     
-    /*  f */  LETTER_CH,   /*  g */  LETTER_CH,   /*  h */  LETTER_CH,
+    /*  f */  LETTER_CH,        /*  g */  LETTER_CH,        /*  h */  LETTER_CH,
     
-    /*  i */  LETTER_CH,   /*  j */  LETTER_CH,   /*  k */  LETTER_CH,
+    /*  i */  LETTER_CH,        /*  j */  LETTER_CH,        /*  k */  LETTER_CH,
     
-    /*  l */  LETTER_CH,   /*  m */  LETTER_CH,   /*  n */  LETTER_CH,
+    /*  l */  LETTER_CH,        /*  m */  LETTER_CH,        /*  n */  LETTER_CH,
     
-    /*  o */  LETTER_CH,   /*  p */  LETTER_CH,   /*  q */  LETTER_CH,
+    /*  o */  LETTER_CH,        /*  p */  LETTER_CH,        /*  q */  LETTER_CH,
     
-    /*  r */  LETTER_CH,   /*  s */  LETTER_CH,   /*  t */  LETTER_CH,
+    /*  r */  LETTER_CH,        /*  s */  LETTER_CH,        /*  t */  LETTER_CH,
     
-    /*  u */  LETTER_CH,   /*  v */  LETTER_CH,   /*  w */  LETTER_CH,
+    /*  u */  LETTER_CH,        /*  v */  LETTER_CH,        /*  w */  LETTER_CH,
     
-    /*  x */  LETTER_CH,   /*  y */  LETTER_CH,   /*  z */  LETTER_CH,
+    /*  x */  LETTER_CH,        /*  y */  LETTER_CH,        /*  z */  LETTER_CH,
     
-    /*  { */  OTHER_CH,    /*  | */  BAR_CH,      /*  } */  OTHER_CH,
+    /*  { */  LFT_CURLYBRACKET_CH,/*  | */  PIPE_CH,        /*  } */  RGT_CURLYBRACKET_CH,
     
-    /*   */  OTHER_CH,    /* ^? */  OTHER_CH,                           };
+    /*   */  OTHER_CH,          /* ^? */  OTHER_CH,                           
+
+};
 
 
 
