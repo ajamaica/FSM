@@ -1,6 +1,57 @@
 #ifndef header
 #define header
 
+#include <string.h>
+
+int isReservedWord(char *);
+
+
+char PALABRAS_RESERVADAS[][15] = {
+    "auto",		
+    "break",			
+    "case",			
+    "char",			
+    "const",			
+    "continue",		
+    "default",		
+    "do",			
+    "double",		
+    "else",			
+    "enum",			
+    "extern",		
+    "float",			
+    "for",			
+    "goto",			
+    "if",			
+    "int",			
+    "long",			
+    "register",		
+    "return",		
+    "short",			
+    "signed",		
+    "sizeof",		
+    "static",		
+    "struct",		
+    "switch",		
+    "typedef",		
+    "union",			
+    "unsigned",		
+    "void",			
+    "volatile",		
+    "while"			
+};
+
+int isReservedWord(char *term){
+    int i;
+    for (i=0; i < sizeof(PALABRAS_RESERVADAS); i++) {
+        if (strcmp(PALABRAS_RESERVADAS[i], term) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+ 
+
 typedef enum {
     
     WHITE_CH,           /* whitespace  */
