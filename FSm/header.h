@@ -15,10 +15,42 @@ typedef enum {
     
     AMPERSAND_CH,         /* & */
     
+    HYPHENMINUS_CH,         /* - */
+
     ADDITION_CH,         /* + */
     
     BAR_CH,               /* | */
     
+    STAR_CH,               /* * */
+    
+    SLASH_CH,               /* / */
+
+    GT_CH,               /* < */
+    
+    LT_CH,               /* > */
+
+    EQ_CH,               /* = */
+    
+    PERCENTAGE_CH,               /* % */
+    
+    COMA_CH,               /* , */
+    
+    SEMICOLON_CH,               /* ; */
+
+    COLON_CH,               /* : */
+    
+    TILDE_CH,               /* ~ */
+    
+    PIPE_CH,               /* | */
+    
+    EXCLAMATION_CH,               /* ! */
+    
+    NUMBER_CH,               /* # */
+    
+    POINT_CH,               /* . */
+    
+    QUOTETATION_CH,               /* ""'' */
+
     CARET_CH,             /* ^ */
     
     EOS_CH,               /* \0 */
@@ -53,15 +85,15 @@ static CharClassType char_class[128] = {
     
     /* ^^ */  OTHER_CH,    /* ^_ */  OTHER_CH,    /*    */  WHITE_CH,
     
-    /*  ! */  OTHER_CH,    /*  " */  OTHER_CH,    /*  # */  OTHER_CH,
+    /*  ! */  OTHER_CH,    /*  " */  QUOTETATION_CH,    /*  # */  NUMBER_CH,
     
     /*  $ */  OTHER_CH,    /*  % */  OTHER_CH,    /*  & */  AMPERSAND_CH,
     
-    /*  ' */  OTHER_CH,    /*  ( */  LFT_PAREN_CH, /*  ) */  RGT_PAREN_CH,
+    /*  ' */  QUOTETATION_CH,    /*  ( */  LFT_PAREN_CH, /*  ) */  RGT_PAREN_CH,
     
     /*  * */  OTHER_CH,    /*  + */  ADDITION_CH,    /*  , */  OTHER_CH,
     
-    /*  - */  OTHER_CH,    /*  . */  OTHER_CH,    /*  / */  OTHER_CH,
+    /*  - */  HYPHENMINUS_CH,    /*  . */  OTHER_CH,    /*  / */  OTHER_CH,
     
     /*  0 */  DIGIT_CH,    /*  1 */  DIGIT_CH,    /*  2 */  DIGIT_CH,
     
@@ -197,6 +229,11 @@ typedef enum {
     LFT_PAREN_TOKEN = 2,    /* left parenthesis */
     
     RGT_PAREN_TOKEN = 3,    /* right parenthesis */
+    
+    SUSTRACTION_TOKEN = 10, /* - */
+    
+    ASIGNATION_TOKEN = 11, /* - */
+
     
     AND_TOKEN       = 4,    /* set intersection connective */
     

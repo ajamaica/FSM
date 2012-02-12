@@ -94,6 +94,9 @@ char *term;    /* out: the token text if the token is a term */
                 case OTHER_CH :   term[i] = '\0';   state = -8; break;
                     
                 case ADDITION_CH :  state = 9; break;
+                    
+                case HYPHENMINUS_CH :  state = 10; break;
+
 
                     
                 default :           state =-8; break;
@@ -134,6 +137,21 @@ char *term;    /* out: the token text if the token is a term */
                 }
             
             break;  
+                
+            case 10:
+                if ( SUSTRACTION_CH != char_class[next_ch]) {
+                    
+                    
+                    term[i] = '\0';
+                    state = -10;
+                    
+                }else{
+                                        
+                    term[i] = '\0';
+                    state = -11;
+                }
+                
+                break;
                 
             default :state = -8; break;
             
@@ -213,6 +231,12 @@ int main(int argc, char **argv, char **envp){
             case NO_TOKEN :        (void)printf ( "%s : no token\n", term ); break;
                 
             case B_TOKEN :        (void)printf ( "%s s : YEEEY \n", term ); break;
+                
+            case SUSTRACTION_TOKEN :        (void)printf ( "%s s : Menos \n", term ); break;
+                
+            case ASIGNATION_TOKEN :        (void)printf ( "%s s : Asignacion \n", term ); break;
+
+
 
                 
             default :              (void)printf ( "bad data\n" ); break;
