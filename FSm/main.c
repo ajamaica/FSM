@@ -123,6 +123,7 @@ char *term;    /* out: the token text if the token is a term */
                 }
                 
                 break;
+                
             case 9:
         
                 if ( ADDITION_CH != char_class[next_ch]) 

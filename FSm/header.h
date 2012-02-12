@@ -230,11 +230,6 @@ typedef enum {
     
     RGT_PAREN_TOKEN = 3,    /* right parenthesis */
     
-    SUSTRACTION_TOKEN = 10, /* - */
-    
-    ASIGNATION_TOKEN = 11, /* - */
-
-    
     AND_TOKEN       = 4,    /* set intersection connective */
     
     ADDITION_TOKEN  = 9,    /* set intersection connective */
@@ -248,6 +243,11 @@ typedef enum {
     NO_TOKEN        = 8,    /* the token is not recognized */
     
     B_TOKEN        = 9,    /* the token is not recognized */
+    
+    SUSTRACTION_TOKEN = 10, /* - */
+    
+    ASIGNATION_TOKEN = 11, /* - */
+
     
     
     
