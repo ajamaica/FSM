@@ -3,7 +3,6 @@
 
 #include <string.h>
 
-int isReservedWord(char *);
 
 
 char PALABRAS_RESERVADAS[][15] = {
@@ -41,9 +40,9 @@ char PALABRAS_RESERVADAS[][15] = {
     "while"			
 };
 
-int isReservedWord(char *term){
+int isReservedWord(char term[128]){
     int i;
-    for (i=0; i < sizeof(PALABRAS_RESERVADAS); i++) {
+    for (i=0; i < sizeof(PALABRAS_RESERVADAS)/sizeof(PALABRAS_RESERVADAS[i]); i++) {
         if (strcmp(PALABRAS_RESERVADAS[i], term) == 0) {
             return 1;
         }

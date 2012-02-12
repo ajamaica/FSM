@@ -134,7 +134,6 @@ char *term;    /* out: the token text if the token is a term */
                 
                 
             case 1 :
-                printf("%c", 'x');
                 
                 if ( (DIGIT_CH != char_class[next_ch])
                     
@@ -155,7 +154,6 @@ char *term;    /* out: the token text if the token is a term */
             
                 
             case 9:
-                printf("%c", '+');
                 if ( ADDITION_CH != char_class[next_ch]) 
                     
                 {
@@ -170,7 +168,6 @@ char *term;    /* out: the token text if the token is a term */
             break;  
                 
             case 10:
-                printf("%c", '-');
                 if ( HYPHENMINUS_CH != char_class[next_ch]) {
                     
                     
@@ -186,7 +183,9 @@ char *term;    /* out: the token text if the token is a term */
                 break;
                 
             case 11:
-                printf("%c", '*');
+                
+                term[i] = '\0';
+                state = -11;
             break;
                 
             case 12:
@@ -257,9 +256,20 @@ int main(int argc, char **argv, char **envp){
             switch( token = GetToken(stream,term) )
             
         {
-                /*
-            case TERM_TOKEN :      (void)printf ( "term: %s\n", term ); break;
                 
+            case TERM_TOKEN : 
+                
+                if (isReservedWord(term)) {
+                    printf("\n %s : PALABRA RESERVADA", term);
+                }
+                else{
+                    printf("\n %s : ID", term);
+                }
+            
+                
+            break;
+                
+            /*
             case LFT_PAREN_TOKEN : (void)printf ( "left parenthesis\n" ); break;
                 
             case RGT_PAREN_TOKEN : (void)printf ( "right parenthesis\n" ); break;
