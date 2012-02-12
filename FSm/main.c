@@ -68,6 +68,7 @@ char *term;    /* out: the token text if the token is a term */
         {
                 
             case 0 :
+            
                 
                 switch( char_class[next_ch] )
                 
@@ -83,7 +84,7 @@ char *term;    /* out: the token text if the token is a term */
                     
                 case AMPERSAND_CH : state = -4; break;
                                         
-                case BAR_CH :       state = -5; break;
+                case PIPE_CH :       state = -5; break;
                     
                 case CARET_CH :     state = -6; break;
                     
@@ -97,8 +98,33 @@ char *term;    /* out: the token text if the token is a term */
                     
                 case HYPHENMINUS_CH :  state = 10; break;
 
-
+                case STAR_CH :  state = 11; break;
                     
+                case SLASH_CH :  state = 12; break;
+                    
+                case GT_CH :  state = 13; break;
+
+                case LT_CH :  state = 14; break;
+
+                case EQ_CH :  state = 15; break;
+
+                case PERCENTAGE_CH :  state = 16; break;
+                    
+                case COMA_CH :  state = 17; break;
+
+                case SEMICOLON_CH :  state = 18; break;
+                    
+                case TILDE_CH :  state = 19; break;
+
+                case EXCLAMATION_CH :  state = 21; break;
+                    
+                case NUMBERSIGN_CH :  state = 22; break;
+                    
+                case POINT_CH :  state = 23; break;
+
+                case QUOTETATION_CH :  state = 24; break;
+
+
                 default :           state =-8; break;
                     
             }
@@ -107,6 +133,7 @@ char *term;    /* out: the token text if the token is a term */
                 
                 
             case 1 :
+                printf("%c", 'x');
                 
                 if ( (DIGIT_CH != char_class[next_ch])
                     
@@ -124,8 +151,10 @@ char *term;    /* out: the token text if the token is a term */
                 
                 break;
                 
+            
+                
             case 9:
-        
+                printf("%c", '+');
                 if ( ADDITION_CH != char_class[next_ch]) 
                     
                 {
@@ -153,6 +182,18 @@ char *term;    /* out: the token text if the token is a term */
                 }
                 
                 break;
+                
+            case 11:
+                printf("%c", '*');
+            break;
+                
+            case 12:
+                printf("%c", '/');
+            break;
+                
+            case 13:
+                printf("%c", '<');
+            break;
                 
             default :state = -8; break;
             
@@ -214,7 +255,7 @@ int main(int argc, char **argv, char **envp){
             switch( token = GetToken(stream,term) )
             
         {
-                
+                /*
             case TERM_TOKEN :      (void)printf ( "term: %s\n", term ); break;
                 
             case LFT_PAREN_TOKEN : (void)printf ( "left parenthesis\n" ); break;
@@ -237,10 +278,11 @@ int main(int argc, char **argv, char **envp){
                 
             case ASIGNATION_TOKEN :        (void)printf ( "%s s : Asignacion \n", term ); break;
 
-
+ */
 
                 
-            default :              (void)printf ( "bad data\n" ); break;
+            default :              (void)printf (""); break;
+                
                 
         }
     
