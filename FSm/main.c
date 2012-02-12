@@ -1,6 +1,5 @@
 #import <stdio.h>
 
-
 typedef enum {
     
     WHITE_CH,             /* whitespace  */
