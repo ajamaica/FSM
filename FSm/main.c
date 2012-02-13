@@ -81,9 +81,9 @@ char *term;    /* out: the token text if the token is a term */
                     
                 case LETTER_CH :    state =  1; break;
                                         
-                case LFT_PAREN_CH : state = -2; break;
+                case LFT_PAREN_CH : term[i] = '\0'; state = -2; break;
                     
-                case RGT_PAREN_CH : state = -3; break;
+                case RGT_PAREN_CH : term[i] = '\0'; state = -3; break;
                     
                 case AMPERSAND_CH : state = -4; break;
                                         
@@ -341,10 +341,10 @@ int main(int argc, char **argv, char **envp){
                 
             break;
                 
-            /*
-            case LFT_PAREN_TOKEN : (void)printf ( "left parenthesis\n" ); break;
-                
-            case RGT_PAREN_TOKEN : (void)printf ( "right parenthesis\n" ); break;
+            case RGT_PAREN_TOKEN :
+            case LFT_PAREN_TOKEN : (void)printf ( "\n %s : Agrupación", term ); break;
+            
+                /*
                 
             case AND_TOKEN :       (void)printf ( "and operator\n" ); break;
                 
