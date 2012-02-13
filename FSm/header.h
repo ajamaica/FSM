@@ -316,6 +316,9 @@ typedef enum {
     
     ASIGNATION_TOKEN = 11, /* - */
     
+    DIVISION_TOKEN = 12, /* / */
+
+    
     DIGIT_TOKEN      = 25,    /* a search term */
     
     DIGIT_POINT_TOKEN      = 26,    /* a search term */
@@ -329,6 +332,12 @@ typedef enum {
     COLON_TOKEN = 20,        /* End Of Statement */
     
     COMMA_TOKEN = 17,           /* comma */
+    
+    ELIPSIS_TOKEN = 28,           /* comma */
+    
+    COMENT_TOKEN = 29           /* comma */
+
+
 
 
     

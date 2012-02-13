@@ -1,20 +1,7 @@
 #include <stdio.h>
 #include "header.h"
 
-/*FN************************************************************************
- 
- 
- GetToken( stream )
- 
- 
- 
- 
- Run a finite state machine on an input stream, collecting
- 
- the text of the token if it is a term. The transition table
- 
- for this DFA is the following (negative states are final):
- 
+/*
  
  State  |  White  Letter  (    )  &   |   ^  EOS  Digit  Other
  
@@ -23,11 +10,6 @@
  0    |   0      1     -2  -3  -4  -5  -6  -7    -8     -8
  
  1    |  -1      1     -1  -1  -1  -1  -1  -1     1     -1
- 
- 
- See the token type above to see what is recognized in the
- 
- various final states.
  
  **/
 
@@ -139,6 +121,7 @@ char *term;    /* out: the token text if the token is a term */
                     
                 case QUESTION_CH : state = -27; break;
                     
+                    
 
 
                 default :           state =-8; break;
@@ -203,13 +186,45 @@ char *term;    /* out: the token text if the token is a term */
                 break;
                 
             case 11:
-
+                if (SLASH_CH == char_class[next_ch] ) {
+                    
+                    term[i] = '\0';
+                    state = 29;
+                }
                 
-                term[i] = '\0';
-                state = -11;
+                
+                
             break;
                 
             case 12:
+                
+                if (SLASH_CH != char_class[next_ch] ) {
+                    ungetc( next_ch, stream );
+                    term[i-1] = '\0';      
+                    state = -12;
+                }
+                
+                if (STAR_CH == char_class[next_ch] ) {
+                    term[i] = '\0';
+                    state = -29;
+                }
+                
+                if (SLASH_CH == char_class[next_ch] ) {
+                    
+                    term[i] = '\0';
+                    state = -29;
+                }
+                
+                if (EQ_CH == char_class[next_ch] ) {
+                    
+                    term[i] = '\0';
+                    state = -11;
+                }
+                
+                
+
+
+                
             break;
                 
             case 13:
@@ -223,14 +238,18 @@ char *term;    /* out: the token text if the token is a term */
 
                     term[i-1] = '\0';
                     state = 26;
-                }else if( (POINT_CH == char_class[next_ch])){
+                }
+                
+                if( (POINT_CH == char_class[next_ch])){
 
-                    
+                    state = 25;
                 }
             break;
                 
                 
-            case 25:                
+            case 25:       
+                
+                
                 if ( (DIGIT_CH != char_class[next_ch]) && ((POINT_CH != char_class[next_ch])))
                     
                 {
@@ -244,7 +263,9 @@ char *term;    /* out: the token text if the token is a term */
                     
                 }
                 
+                
                 if ((POINT_CH == char_class[next_ch])) {
+                    
                     state = 26;
                 }
                 
@@ -268,7 +289,12 @@ char *term;    /* out: the token text if the token is a term */
                     state = -26;
                     
                 }
+                
+                
+                
+                
             break;
+    
                 
            
                 
@@ -289,31 +315,6 @@ char *term;    /* out: the token text if the token is a term */
 } /* GetToken */
 
 
-
-/*FN***********************************************************************
- 
- 
- main( argc, argv )
- 
- 
- Returns: int -- 0 on success, 1 on failure
- 
- 
- Purpose: Program main function
- 
- 
- Plan:    Part 1: Open a file named on the command line
- 
- Part 2: List all the tokens found in the file
- 
- Part 3: Close the file and return
- 
- 
- Notes:   This program simply lists the tokens found in a single file
- 
- named on the command line.
- 
- **/
 
 
 int main(int argc, char **argv, char **envp){
@@ -374,26 +375,19 @@ int main(int argc, char **argv, char **envp){
                 
             case SEMICOLON_TOKEN:
                 printf("\n %s : EOS(End of Statement)", term);
-                /*
+                break;
                 
-            case AND_TOKEN :       (void)printf ( "and operator\n" ); break;
+            case COMENT_TOKEN:
+                printf("\n %s : comentario ", term);
+                break;
+            
+            case ASIGNATION_TOKEN:
+                printf("\n %s : asignacion ", term);
+                break;
                 
-            case OR_TOKEN :        (void)printf ( "or operator\n" ); break;
-                
-            case NOT_TOKEN :       (void)printf ( "not operator\n" ); break;
-                
-            case END_TOKEN :       (void)printf ( "end of string\n" ); break;
-                
-            case NO_TOKEN :        (void)printf ( "%s : no token\n", term ); break;
-                
-            case B_TOKEN :        (void)printf ( "%s s : YEEEY \n", term ); break;
-                
-            case SUSTRACTION_TOKEN :        (void)printf ( "%s s : Menos \n", term ); break;
-                
-            case ASIGNATION_TOKEN :        (void)printf ( "%s s : Asignacion \n", term ); break;
-
- */
-
+            case DIVISION_TOKEN:
+                printf("\n %s : Operación ", term);
+                break;
                 
             default :              (void)printf (""); break;
                 
