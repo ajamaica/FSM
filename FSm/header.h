@@ -290,6 +290,14 @@ typedef enum {
     
     RGT_PAREN_TOKEN = 3,    /* right parenthesis */
     
+    LFT_CURLYBRACKET_TOKEN = 30, /* left curly bracket */
+    
+    RGT_CURLYBRACKET_TOKEN = 31, /* right curly bracket */
+    
+    LFT_SQRBRACKET_TOKEN = 32, /* left square bracket */
+    
+    RGT_SQRBRACKET_TOKEN = 33, /* right square bracket */
+    
     AND_TOKEN       = 4,    /* set intersection connective */
     
     ADDITION_TOKEN  = 9,    /* set intersection connective */
@@ -311,6 +319,10 @@ typedef enum {
     DIGIT_TOKEN      = 25,    /* a search term */
     
     DIGIT_POINT_TOKEN      = 26,    /* a search term */
+    
+    QUESTION_TOKEN = 27,       /* ? */
+    
+    SEMICOLON_TOKEN = 18        /* End Of Statement */
 
 
     

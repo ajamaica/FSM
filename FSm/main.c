@@ -85,6 +85,14 @@ char *term;    /* out: the token text if the token is a term */
                     
                 case RGT_PAREN_CH : term[i] = '\0'; state = -3; break;
                     
+                case LFT_CURLYBRACKET_CH : term[i] = '\0'; state = -30; break;
+                    
+                case RGT_CURLYBRACKET_CH : term[i] = '\0'; state = -31; break;
+                    
+                case LFT_SQRBRACKET_CH : term[i] = '\0'; state = -32; break;
+                    
+                case RGT_SQRBRACKET_CH : term[i] = '\0'; state = -33; break;
+                    
                 case AMPERSAND_CH : state = -4; break;
                                         
                 case PIPE_CH :       state = -5; break;
@@ -115,7 +123,7 @@ char *term;    /* out: the token text if the token is a term */
                     
                 case COMMA_CH :  state = 17; break;
 
-                case SEMICOLON_CH :  state = 18; break;
+                case SEMICOLON_CH : term[i] = '\0'; state = -18; break;
                     
                 case TILDE_CH :  state = 19; break;
 
@@ -126,6 +134,8 @@ char *term;    /* out: the token text if the token is a term */
                 case POINT_CH :  state = 23; break;
 
                 case QUOTATION_CH :  state = 24; break;
+                    
+                case QUESTION_CH : state = -27; break;
                     
 
 
@@ -258,6 +268,8 @@ char *term;    /* out: the token text if the token is a term */
                 }
             break;
                 
+           
+                
             default : state = -8; break;
             
                 
@@ -332,7 +344,7 @@ int main(int argc, char **argv, char **envp){
             break;
                 
             case DIGIT_TOKEN:
-                //printf("\n %s : NUMERO", term);
+                printf("\n %s : NUMERO", term);
 
             break;
                 
@@ -342,8 +354,18 @@ int main(int argc, char **argv, char **envp){
             break;
                 
             case RGT_PAREN_TOKEN :
-            case LFT_PAREN_TOKEN : (void)printf ( "\n %s : Agrupación", term ); break;
-            
+            case LFT_PAREN_TOKEN :
+            case RGT_CURLYBRACKET_TOKEN :
+            case LFT_CURLYBRACKET_TOKEN :
+            case RGT_SQRBRACKET_TOKEN :
+            case LFT_SQRBRACKET_TOKEN : (void)printf ( "\n %s : Agrupación", term ); break;
+                
+            case QUESTION_TOKEN:
+                printf("\n %s : CONDICIONAL", term);
+            break;
+                
+            case SEMICOLON_TOKEN:
+                printf("\n %s : EOS(End of Statement)", term);
                 /*
                 
             case AND_TOKEN :       (void)printf ( "and operator\n" ); break;
