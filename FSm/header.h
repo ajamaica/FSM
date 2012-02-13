@@ -322,7 +322,13 @@ typedef enum {
     
     QUESTION_TOKEN = 27,       /* ? */
     
-    SEMICOLON_TOKEN = 18        /* End Of Statement */
+    SEMICOLON_TOKEN = 18,        /* End Of Statement */
+    
+    TILDE_TOKEN = 19,        /* End Of Statement */
+    
+    COLON_TOKEN = 20,        /* End Of Statement */
+    
+    COMMA_TOKEN = 17,           /* comma */
 
 
     

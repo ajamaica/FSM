@@ -121,11 +121,13 @@ char *term;    /* out: the token text if the token is a term */
 
                 case PERCENTAGE_CH :  state = 16; break;
                     
-                case COMMA_CH :  state = 17; break;
+                case COMMA_CH :  state = -17; break;
 
                 case SEMICOLON_CH : term[i] = '\0'; state = -18; break;
+                
+                case COLON_CH : state = -20; break;
                     
-                case TILDE_CH :  state = 19; break;
+                case TILDE_CH :  state = -19; break;
 
                 case EXCLAMATION_CH :  state = 21; break;
                     
@@ -358,10 +360,16 @@ int main(int argc, char **argv, char **envp){
             case RGT_CURLYBRACKET_TOKEN :
             case LFT_CURLYBRACKET_TOKEN :
             case RGT_SQRBRACKET_TOKEN :
-            case LFT_SQRBRACKET_TOKEN : (void)printf ( "\n %s : Agrupación", term ); break;
+            case LFT_SQRBRACKET_TOKEN : 
+            case COMMA_TOKEN: (void)printf ( "\n %s : Agrupación", term ); break;
                 
+            case COLON_TOKEN:
             case QUESTION_TOKEN:
                 printf("\n %s : CONDICIONAL", term);
+            break;
+                
+            case TILDE_TOKEN:
+                printf("\n %s : DESTRUCTOR", term);
             break;
                 
             case SEMICOLON_TOKEN:
