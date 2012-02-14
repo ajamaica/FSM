@@ -2,8 +2,10 @@
 #define header
 
 #include <string.h>
-
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 char PALABRAS_RESERVADAS[][15] = {
     "auto",		
@@ -344,8 +346,6 @@ typedef enum {
     
     
 } TokenType;
-
-
 
 
 #endif

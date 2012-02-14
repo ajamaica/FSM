@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "header.h"
 
 /*
@@ -325,35 +324,68 @@ int main(int argc, char **argv, char **envp){
     
     FILE *stream;      /* where to read the data from */
     
+    int fd_output;      /* File Descriptor for Output File */
+    
+    
+    if( (fd_output = open("OutputFile.html", O_WRONLY | O_TRUNC | O_CREAT, 0666)) < 0){
+        fprintf(stderr, "El archivo de Output 'OutputFile.html' no existe, no se puede crear o no se puede abrir.\n");
+    }
+    
+    char *output =
+    "<head>"
+    "\n</head>"
+    "\n<body>"
+    "\n<table border=1>"
+    "\n\t<tr>"
+    "\n\t\t<th>Simbolos</th>"
+    "\n\t\t<th>Tipo</th>"
+    "\n\t</tr>";
+
+    /*
+    "\n</table>"
+    "\n</body>";
+     
+     
+    
+    <tr>
+    <td>row 1, cell 1</td>
+    <td>row 1, cell 2</td>
+    </tr>
+     
+    <tr>
+    <td>row 2, cell 1</td>
+    <td>row 2, cell 2</td>
+    </tr>
+     */
+    write( fd_output, output, strlen(output));
+    
     
     stream = fopen("File.c","r");
         
-        do
-            
-            switch( token = GetToken(stream,term) )
-            
-        {
+    do{
+        output = 
+        "\n\t<tr>"
+        "\n\t\t<td>";
+        write( fd_output, output, strlen(output));
+        switch( token = GetToken(stream,term) )
+        {  
                 
-            case TERM_TOKEN : 
                 
+            case TERM_TOKEN :
                 if (isReservedWord(term)) {
                     printf("\n %s : PALABRA RESERVADA", term);
                 }
                 else{
                     printf("\n %s : ID", term);
                 }
-            
-                
             break;
                 
             case DIGIT_TOKEN:
                 printf("\n %s : NUMERO", term);
-
             break;
                 
             case DIGIT_POINT_TOKEN:
                 printf("\n %s : NUMERO", term);
-                
             break;
                 
             case RGT_PAREN_TOKEN :
@@ -362,7 +394,8 @@ int main(int argc, char **argv, char **envp){
             case LFT_CURLYBRACKET_TOKEN :
             case RGT_SQRBRACKET_TOKEN :
             case LFT_SQRBRACKET_TOKEN : 
-            case COMMA_TOKEN: (void)printf ( "\n %s : Agrupación", term ); break;
+            case COMMA_TOKEN: (void)printf ( "\n %s : Agrupación", term ); 
+            break;
                 
             case COLON_TOKEN:
             case QUESTION_TOKEN:
@@ -375,7 +408,20 @@ int main(int argc, char **argv, char **envp){
                 
             case SEMICOLON_TOKEN:
                 printf("\n %s : EOS(End of Statement)", term);
-                break;
+            break;
+                /*
+                
+            case AND_TOKEN :       (void)printf ( "and operator\n" ); break;
+                
+            case OR_TOKEN :        (void)printf ( "or operator\n" ); break;
+                
+            case NOT_TOKEN :       (void)printf ( "not operator\n" ); break;
+                
+            case END_TOKEN :       (void)printf ( "end of string\n" ); break;
+                
+            case NO_TOKEN :        (void)printf ( "%s : no token\n", term ); break;
+                
+            case B_TOKEN :        (void)printf ( "%s s : YEEEY \n", term ); break;
                 
             case COMENT_TOKEN:
                 printf("\n %s : comentario ", term);
@@ -388,15 +434,30 @@ int main(int argc, char **argv, char **envp){
             case DIVISION_TOKEN:
                 printf("\n %s : Operación ", term);
                 break;
+            */
+            default :
+                (void)printf ("Error"); 
+            break;
                 
-            default :              (void)printf (""); break;
-                
+        
                 
         }
+        
+        
+        write( fd_output, term, strlen(term));
+        output = 
+        "</td>"
+        "\n\t\t<td> Palabra Rervada</td>"
+        "\n\t</tr>";
+        write( fd_output, output, strlen(output));
+    }while ( END_TOKEN != token );
+    char *salida =
+    "\n</table>"
+    "\n</body>";
     
-    while ( END_TOKEN != token );
+    write( fd_output, salida, strlen(salida));
     
-    
+    close(fd_output);
     fclose ( stream );
     
     
