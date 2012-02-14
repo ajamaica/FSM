@@ -155,78 +155,128 @@ char *term;    /* out: the token text if the token is a term */
 
                 
             case 9:
-                if ( ADDITION_CH != char_class[next_ch]) 
+                
+                if (ADDITION_CH == char_class[next_ch] ) {
                     
-                {
-                    
-                    ungetc( next_ch, stream );
-                    
-                    term[i-1] = '\0';
+                    term[i] = '\0';
                     state = -9;
-                    
+                }else
+
+                        
+                if (EQ_CH == char_class[next_ch] ) {
+                            
+                            term[i] = '\0';
+                            state = -13;
+                }else
+                {
+                            ungetc( next_ch, stream );
+                            term[i-1] = '\0';      
+                            state = -9;
                 }
             
             break;  
                 
             case 10:
 
-                if ( HYPHENMINUS_CH != char_class[next_ch]) {
-
+                if (HYPHENMINUS_CH == char_class[next_ch] ) {
                     
                     term[i] = '\0';
-                    state = -10;
+                    state = -9;
+                }else
+                    
+                    
+                if (EQ_CH == char_class[next_ch] ) {
+                        
+                        term[i] = '\0';
+                        state = -ASIGNATION_TOKEN;
+                }else
+                if (GT_CH == char_class[next_ch]) {
+                    term[i] = '\0';
+                    state = -POINTER_TOKEN;
                     
                 }else{
-                                        
-                    term[i] = '\0';
-                    state = -11;
+                        ungetc( next_ch, stream );
+                        term[i-1] = '\0';      
+                        state = -9;
                 }
                 
                 break;
                 
             case 11:
-                if (SLASH_CH == char_class[next_ch] ) {
                     
                     term[i] = '\0';
                     state = 29;
-                }
-                
                 
                 
             break;
                 
             case 12:
                 
-                if (SLASH_CH != char_class[next_ch] ) {
-                    ungetc( next_ch, stream );
-                    term[i-1] = '\0';      
-                    state = -12;
-                }
-                
+               
                 if (STAR_CH == char_class[next_ch] ) {
+                    
                     term[i] = '\0';
                     state = -29;
-                }
+                }else
                 
                 if (SLASH_CH == char_class[next_ch] ) {
                     
                     term[i] = '\0';
                     state = -29;
-                }
+                }else
                 
                 if (EQ_CH == char_class[next_ch] ) {
                     
                     term[i] = '\0';
-                    state = -11;
+                    state = -13;
+                }else
+                {
+                    ungetc( next_ch, stream );
+                    term[i-1] = '\0';      
+                    state = -12;
                 }
+                
                 
                 
 
 
                 
             break;
-                
+           
             case 13:
+                
+                if (GT_CH == char_class[next_ch] ) {
+                        
+                        term[i] = '\0';
+                        state = 100;
+                }else
+                        
+                if (EQ_CH == char_class[next_ch] ) {
+                            
+                            term[i] = '\0';
+                            state = -EQ_TESTING_TOKEN;
+                }else
+                {
+                            ungetc( next_ch, stream );
+                            term[i-1] = '\0';      
+                            state = -LOGIC_TOKEN;
+                }
+                
+            break;
+                
+            // >>
+            case 100:
+                if (EQ_CH == char_class[next_ch] ) {
+                    ungetc( next_ch, stream );
+                    term[i] = '\0';      
+                    state = -BITWISE_LOGIC_TOKEN;
+
+                }else{
+                    ungetc( next_ch, stream );
+                    term[i-1] = '\0';      
+                    state = -BITWISE_SHIFT_TOKEN;
+                }
+            
             break;
                 
                 
@@ -293,6 +343,28 @@ char *term;    /* out: the token text if the token is a term */
                 
                 
             break;
+                
+            case 29:
+                
+                
+                if ( (DIGIT_CH != char_class[next_ch]) && (LETTER_CH != char_class[next_ch]) )
+                    
+                {
+                    
+                    
+                    ungetc( next_ch, stream );
+                    
+                    term[i-1] = '\0';
+                    
+                    state = -29;
+                    
+                }
+                
+                
+                
+                
+                break;
+
     
                 
            
@@ -340,23 +412,7 @@ int main(int argc, char **argv, char **envp){
     "\n\t\t<th>Simbolos</th>"
     "\n\t\t<th>Tipo</th>"
     "\n\t</tr>";
-
-    /*
-    "\n</table>"
-    "\n</body>";
-     
-     
     
-    <tr>
-    <td>row 1, cell 1</td>
-    <td>row 1, cell 2</td>
-    </tr>
-     
-    <tr>
-    <td>row 2, cell 1</td>
-    <td>row 2, cell 2</td>
-    </tr>
-     */
     write( fd_output, output, strlen(output));
     
     
@@ -409,34 +465,39 @@ int main(int argc, char **argv, char **envp){
             case SEMICOLON_TOKEN:
                 printf("\n %s : EOS(End of Statement)", term);
             break;
-                /*
-                
-            case AND_TOKEN :       (void)printf ( "and operator\n" ); break;
-                
-            case OR_TOKEN :        (void)printf ( "or operator\n" ); break;
-                
-            case NOT_TOKEN :       (void)printf ( "not operator\n" ); break;
-                
-            case END_TOKEN :       (void)printf ( "end of string\n" ); break;
-                
-            case NO_TOKEN :        (void)printf ( "%s : no token\n", term ); break;
-                
-            case B_TOKEN :        (void)printf ( "%s s : YEEEY \n", term ); break;
                 
             case COMENT_TOKEN:
-                printf("\n %s : comentario ", term);
+                printf("\n %s : Comentario", term);
                 break;
             
-            case ASIGNATION_TOKEN:
-                printf("\n %s : asignacion ", term);
+            case ADDITION_TOKEN:
+            case DIVISION_TOKEN:
+                printf("\n %s : Operacion", term);
                 break;
                 
-            case DIVISION_TOKEN:
-                printf("\n %s : Operación ", term);
-                break;
-            */
+            case ASIGNATION_TOKEN:
+                printf("\n %s : Asignacion", term);
+            break;
+                
+            case POINTER_TOKEN:
+                printf("\n %s : Pointer", term);
+            break;
+                
+            case EQ_TESTING_TOKEN:
+                printf("\n %s : Equality Testing", term);
+            break;
+                
+            case BITWISE_LOGIC_TOKEN:
+                printf("\n %s : Bitwise Logic", term);
+            break;
+                
+            case BITWISE_SHIFT_TOKEN:
+                printf("\n %s : Bitwise Shift Logic", term);
+            break;
+                
+
             default :
-                (void)printf ("Error"); 
+                //(void)printf ("Error"); 
             break;
                 
         

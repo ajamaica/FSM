@@ -83,9 +83,9 @@ typedef enum {
     
     SLASH_CH,           /* / */
 
-    GT_CH,              /* < */
+    GT_CH,              /* > */
     
-    LT_CH,              /* > */
+    LT_CH,              /* < */
 
     EQ_CH,              /* = */
     
@@ -312,13 +312,15 @@ typedef enum {
     
     NO_TOKEN        = 8,    /* the token is not recognized */
     
-    B_TOKEN        = 9,    /* the token is not recognized */
     
     SUSTRACTION_TOKEN = 10, /* - */
     
-    ASIGNATION_TOKEN = 11, /* - */
+    STAR_TOKEN = 11, /* * */
     
     DIVISION_TOKEN = 12, /* / */
+    
+    ASIGNATION_TOKEN = 13, /* - */
+
 
     
     DIGIT_TOKEN      = 25,    /* a search term */
@@ -337,7 +339,28 @@ typedef enum {
     
     ELIPSIS_TOKEN = 28,           /* comma */
     
-    COMENT_TOKEN = 29           /* comma */
+    COMENT_TOKEN = 29,        /* comma */
+    
+    POINTER_TOKEN = 34,          /* comma */
+    
+    LOGIC_TOKEN = 35,          /* comma */
+
+    ARITMETIC_TOKEN = 36,
+    
+    ASSIGMENT_TOKEN = 37,
+    
+    AUGMENTED_TOKEN = 38,
+    
+    BITWISE_LOGIC_TOKEN = 39,
+    
+    BITWISE_SHIFT_TOKEN = 40,
+    
+    CONDICIONAL_TOKEN = 41,
+    
+    EQ_TESTING_TOKEN = 42,
+    
+    ORDER_RELATIONS_TOKEN  = 43
+    
 
 
 
