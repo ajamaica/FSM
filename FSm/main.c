@@ -548,6 +548,7 @@ int main(int argc, char **argv, char **envp){
         output = 
         "\n\t<tr>"
         "\n\t\t<td>";
+        char *tipo;
         write( fd_output, output, strlen(output));
         switch( token = LeerToken(stream,term) )
         {  
@@ -555,74 +556,91 @@ int main(int argc, char **argv, char **envp){
                 
             case TERM_TOKEN :
                 if (isReservedWord(term)) {
+                    tipo = "Palabra Reservada";
                     printf("\n %s : PALABRA RESERVADA", term);
                 }
                 else{
+                    tipo = "Variable/ID";
                     printf("\n %s : ID", term);
                 }
             break;
                 
             case DIGIT_TOKEN:
+                tipo = "Numero";
                 printf("\n %s : NUMERO", term);
             break;
                 
             case DIGIT_POINT_TOKEN:
+                tipo = "Numero Decimal";
                 printf("\n %s : NUMERO DECIMAL", term);
             break;
                 
             case AGRUPATION_TOKEN : 
             case COMMA_TOKEN: (void)printf ( "\n %s : AGRUPACION", term ); 
+                tipo = "Agrupacion";
             break;
                 
             case COLON_TOKEN:
             case QUESTION_TOKEN:
+                tipo = "Condicional";
                 printf("\n %s : CONDICIONAL", term);
             break;
                 
             case TILDE_TOKEN:
+                tipo = "Destructor";
                 printf("\n %s : DESTRUCTOR", term);
             break;
                 
             case SEMICOLON_TOKEN:
+                tipo = "EOS (End Of Statement)";
                 printf("\n %s : EOS", term);
             break;
                 
             case COMENT_TOKEN:
+                tipo = "Comentario";
                 printf("\n %s : COMENTARIO", term);
                 break;
             
             case ARITMETIC_TOKEN:
             case ADDITION_TOKEN:
             case DIVISION_TOKEN:
+                tipo = "Operacion";
                 printf("\n %s : OPERACION", term);
                 break;
                 
             case ASSIGMENT_TOKEN:
             case ASIGNATION_TOKEN:
+                tipo = "Asignacion";
                 printf("\n %s : ASIGNACION", term);
             break;
                 
             case POINTER_TOKEN:
+                tipo = "Apuntador";
                 printf("\n %s : APUNTADOR", term);
             break;
                 
             case EQ_TESTING_TOKEN:
+                tipo = "Equality Testing";
                 printf("\n %s : Equality Testing", term);
             break;
                 
             case LOGIC_TOKEN:
+                tipo = "Operado Logico";
                 printf("\n %s :  LOGICO", term);
             break;
                 
             case BITWISE_LOGIC_TOKEN:
+                tipo = "Operador Logico Bitwise";
                 printf("\n %s : LOGICO BITWISE", term);
             break;
                 
             case STRING_TOKEN:
+                tipo = "String";
                 printf("\n %s : STRING TOKEN", term);
             break;
                 
             case BITWISE_SHIFT_TOKEN:
+                tipo = "Operado Logico Bitwise de Shift";
                 printf("\n %s : LOGICO BITWISE SHIFT ", term);
             break;
                 
@@ -639,7 +657,11 @@ int main(int argc, char **argv, char **envp){
         write( fd_output, term, strlen(term));
         output = 
         "</td>"
-        "\n\t\t<td> Palabra Rervada</td>"
+        "\n\t\t<td>";
+        write(fd_output, output, strlen(output));
+        write(fd_output, tipo, strlen(tipo));
+        output=
+        "</td>"
         "\n\t</tr>";
         write( fd_output, output, strlen(output));
     }while ( END_TOKEN != token );
