@@ -2,11 +2,11 @@
 
 int main(int argc, char **argv, char **envp){
     
-    TokenT token;   /* next token in the input stream */
+    TokenT token;       /* next token in the input stream */
     
-    char term[128];    /* the term recognized */
+    char term[128];     /* the term recognized */
     
-    FILE *stream;      /* where to read the data from */
+    FILE *stream;       /* where to read the data from */
     
     int fd_output;      /* File Descriptor for Output File */
     
@@ -16,30 +16,28 @@ int main(int argc, char **argv, char **envp){
     }
     
     char *output =
-    "<head>"
-    "\n</head>"
-    "\n<body>"
-    "\n<table border=1>"
-    "\n\t<tr>"
-    "\n\t\t<th>Simbolos</th>"
-    "\n\t\t<th>Tipo</th>"
-    "\n\t</tr>";
-    
+                "<head>"
+                "\n</head>"
+                "\n<body>"
+                "\n<table border=1>"
+                "\n\t<tr>"
+                "\n\t\t<th>Simbolos</th>"
+                "\n\t\t<th>Tipo</th>"
+                "\n\t</tr>";
     write( fd_output, output, strlen(output));
     
     
     stream = fopen("File.c","r");
         
-    do{
+    do {
         output = 
-        "\n\t<tr>"
-        "\n\t\t<td>";
-        char *tipo;
+                "\n\t<tr>"
+                "\n\t\t<td>";
         write( fd_output, output, strlen(output));
-        switch( token = LeerToken(stream,term) )
-        {  
-                
-                
+        
+        char *tipo;
+        
+        switch ( token = LeerToken(stream,term) ) {  
             case TERM_TOKEN :
                 if (isReservedWord(term)) {
                     tipo = "Palabra Reservada";
@@ -85,14 +83,14 @@ int main(int argc, char **argv, char **envp){
             case COMENT_TOKEN:
                 tipo = "Comentario";
                 printf("\n %s : COMENTARIO", term);
-                break;
+            break;
             
             case ARITMETIC_TOKEN:
             case ADDITION_TOKEN:
             case DIVISION_TOKEN:
                 tipo = "Operacion";
                 printf("\n %s : OPERACION", term);
-                break;
+            break;
                 
             case ASSIGMENT_TOKEN:
             case ASIGNATION_TOKEN:
@@ -133,13 +131,10 @@ int main(int argc, char **argv, char **envp){
 
             default :
                 //(void)printf ("Error"); 
-            break;
-                
-        
-                
+            break;        
         }
         
-        
+        /* HTML Output */
         write( fd_output, term, strlen(term));
         output = 
         "</td>"
@@ -150,11 +145,13 @@ int main(int argc, char **argv, char **envp){
         "</td>"
         "\n\t</tr>";
         write( fd_output, output, strlen(output));
+        /**/
+        
     }while ( END_TOKEN != token );
-    char *salida =
-    "\n</table>"
-    "\n</body>";
     
+    char *salida =
+                "\n</table>"
+                "\n</body>";
     write( fd_output, salida, strlen(salida));
     
     close(fd_output);
