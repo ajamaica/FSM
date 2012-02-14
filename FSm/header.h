@@ -351,16 +351,12 @@ typedef enum {
     
     EQ_TESTING_TOKEN = 42,
     
-    ORDER_RELATIONS_TOKEN  = 43
+    ORDER_RELATIONS_TOKEN  = 43,
     
-
-
-
+    STRING_TOKEN  = 44
 
     
-    
-    
-} TokenType;
+} TokenT;
 
 
 #endif

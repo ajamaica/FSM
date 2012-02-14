@@ -10,9 +10,9 @@
  **/
 
 
-static TokenType
+static TokenT
 
-GetToken( stream, term )
+LeerToken( stream, term )
 
 FILE *stream;  
 
@@ -55,7 +55,6 @@ char *term;
             {
                     
                 case WHITE_CH :     i = 0; break;
-                    
                 case LETTER_CH :    state =  1; break;
                                         
                 case LFT_PAREN_CH :
@@ -121,9 +120,7 @@ char *term;
                 break;
                 
                 
-            case 1 :
-                
-                
+            case 1 :                
                 
                 if ( (DIGIT_CH != char_class[next_ch])
                     
@@ -134,11 +131,7 @@ char *term;
                     ungetc( next_ch, stream );
                     
                     term[i-1] = '\0';
-                    
                     state = -1;
-                    
-                    
-                    
                 }
                 
                 
@@ -197,13 +190,13 @@ char *term;
                         
                 if (EQ_CH == char_class[next_ch] ) {
                             
-                            term[i] = '\0';
-                            state = -13;
+                    term[i] = '\0';
+                    state = -13;
                 }else
                 {
-                            ungetc( next_ch, stream );
-                            term[i-1] = '\0';      
-                            state = -9;
+                    ungetc( next_ch, stream );
+                    term[i-1] = '\0';      
+                    state = -9;
                 }
             
             break;  
@@ -247,14 +240,34 @@ char *term;
                
                 if (STAR_CH == char_class[next_ch] ) {
                     
+                    
+                    
+                    while (1) {
+                        if ( '*' == (next_ch = getc(stream)) && '/' == (next_ch =getc(stream))  ){
+                            term[i++] = convert_case['*'];
+                            term[i++] = convert_case['/'];
+                            break;
+                        }
+                        term[i++] = convert_case[next_ch];
+                        term[i] = '\0';
+                    }
+                    
                     term[i] = '\0';
-                    state = -29;
+                    state = -COMENT_TOKEN;
+                    
                 }else
                 
                 if (SLASH_CH == char_class[next_ch] ) {
                     
+                    while (1) {
+                        if ( '\n' == (next_ch = getc(stream)) ){
+                            break;
+                        }
+                        term[i++] = convert_case[next_ch];
+                    }
+                    
                     term[i] = '\0';
-                    state = -29;
+                    state = -COMENT_TOKEN;
                 }else
                 
                 if (EQ_CH == char_class[next_ch] ) {
@@ -361,6 +374,22 @@ char *term;
             
             break;
                 
+            case 21:
+                
+                if (EQ_CH == char_class[next_ch] ) {
+                    
+                    term[i] = '\0';
+                    state = -LOGIC_TOKEN;
+                }else
+                {
+                    ungetc( next_ch, stream );
+                    term[i-1] = '\0';
+                    state = -ASSIGMENT_TOKEN;
+                }
+                
+            
+            break;
+                
                 
                 
                 
@@ -377,6 +406,21 @@ char *term;
 
                     state = 25;
                 }
+            break;
+                
+            case 24:
+                
+                
+                while (QUOTATION_CH != char_class[(next_ch = getc(stream))]) {
+                    term[i++] = convert_case[next_ch];
+                    
+                }
+                term[i++] = convert_case[next_ch];
+                state = -STRING_TOKEN;
+                
+                term[i] = '\0';
+
+                
             break;
                 
                 
@@ -440,7 +484,7 @@ char *term;
                     
                     term[i-1] = '\0';
                     
-                    state = -29;
+                    state = -COMENT_TOKEN;
                     
                 }
                 
@@ -463,7 +507,7 @@ char *term;
     
     
     
-    return( (TokenType) (-state) );
+    return( (TokenT) (-state) );
     
     
 } 
@@ -472,7 +516,7 @@ char *term;
 
 int main(int argc, char **argv, char **envp){
     
-    TokenType token;   /* next token in the input stream */
+    TokenT token;   /* next token in the input stream */
     
     char term[128];    /* the term recognized */
     
@@ -505,7 +549,7 @@ int main(int argc, char **argv, char **envp){
         "\n\t<tr>"
         "\n\t\t<td>";
         write( fd_output, output, strlen(output));
-        switch( token = GetToken(stream,term) )
+        switch( token = LeerToken(stream,term) )
         {  
                 
                 
@@ -572,6 +616,10 @@ int main(int argc, char **argv, char **envp){
                 
             case BITWISE_LOGIC_TOKEN:
                 printf("\n %s : LOGICO BITWISE", term);
+            break;
+                
+            case STRING_TOKEN:
+                printf("\n %s : STRING TOKEN", term);
             break;
                 
             case BITWISE_SHIFT_TOKEN:
