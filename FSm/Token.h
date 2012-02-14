@@ -296,7 +296,7 @@ static TokenT LeerToken( FILE *stream, char *term ) {
                 }
                 break;
                 
-                // BITWISE
+            // BITWISE
             case 100:
                 if (EQ_CH == char_class[next_ch] ) {
                     ungetc( next_ch, stream );

@@ -294,8 +294,6 @@ typedef enum {
         
     AND_TOKEN       = 4,    /* set intersection connective */
     
-    ADDITION_TOKEN  = 9,    /* set intersection connective */
-    
     OR_TOKEN        = 5,    /* set union connective */
     
     NOT_TOKEN       = 6,    /* set difference connective */
@@ -304,6 +302,7 @@ typedef enum {
     
     NO_TOKEN        = 8,    /* the token is not recognized */
     
+    ADDITION_TOKEN  = 9,    /* set intersection connective */
     
     SUSTRACTION_TOKEN = 10, /* - */
     
@@ -312,8 +311,6 @@ typedef enum {
     DIVISION_TOKEN = 12, /* / */
     
     ASIGNATION_TOKEN = 13, /* - */
-
-
     
     DIGIT_TOKEN      = 25,    /* a search term */
     
