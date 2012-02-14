@@ -1,10 +1,7 @@
 #include "header.h"
 
 /*
- 
- State  |  White  Letter  (    )  &   |   ^  EOS  Digit  Other
- 
- -------------------------------------------------------------
+  
  
  0    |   0      1     -2  -3  -4  -5  -6  -7    -8     -8
  
@@ -17,20 +14,19 @@ static TokenType
 
 GetToken( stream, term )
 
-FILE *stream;  /* in: where to grab input characters */
+FILE *stream;  
 
-char *term;    /* out: the token text if the token is a term */
+char *term;
 
 {
     
-    int next_ch;  /* from the input stream */
+    int next_ch;  
     
-    int state;    /* of the tokenizer DFA */
+    int state;    
     
-    int i;        /* for scanning through the term buffer */
+    int i;        
     
     int p;
-    /* Part 1: Run a state machine on the input */
     
     state = 0;
     
@@ -62,23 +58,18 @@ char *term;    /* out: the token text if the token is a term */
                     
                 case LETTER_CH :    state =  1; break;
                                         
-                case LFT_PAREN_CH : term[i] = '\0'; state = -2; break;
+                case LFT_PAREN_CH :
+                case RGT_PAREN_CH :
+                case LFT_CURLYBRACKET_CH :
+                case RGT_CURLYBRACKET_CH : 
+                case LFT_SQRBRACKET_CH : 
+                case RGT_SQRBRACKET_CH : term[i] = '\0'; state = -AGRUPATION_TOKEN; break;
                     
-                case RGT_PAREN_CH : term[i] = '\0'; state = -3; break;
-                    
-                case LFT_CURLYBRACKET_CH : term[i] = '\0'; state = -30; break;
-                    
-                case RGT_CURLYBRACKET_CH : term[i] = '\0'; state = -31; break;
-                    
-                case LFT_SQRBRACKET_CH : term[i] = '\0'; state = -32; break;
-                    
-                case RGT_SQRBRACKET_CH : term[i] = '\0'; state = -33; break;
-                    
-                case AMPERSAND_CH : state = -4; break;
+                case AMPERSAND_CH : state = 4; break;
                                         
-                case PIPE_CH :       state = -5; break;
+                case PIPE_CH :       state = 5; break;
                     
-                case CARET_CH :     state = -6; break;
+                case CARET_CH :     state = 6; break;
                     
                 case EOS_CH :       state = -7; break;
                     
@@ -102,11 +93,11 @@ char *term;    /* out: the token text if the token is a term */
 
                 case PERCENTAGE_CH :  state = 16; break;
                     
-                case COMMA_CH :  state = -17; break;
+                case COMMA_CH : term[i] = '\0'; state = -17; break;
 
                 case SEMICOLON_CH : term[i] = '\0'; state = -18; break;
                 
-                case COLON_CH : state = -20; break;
+                case COLON_CH : term[i] = '\0'; state = -20; break;
                     
                 case TILDE_CH :  state = -19; break;
 
@@ -152,7 +143,48 @@ char *term;    /* out: the token text if the token is a term */
                 
                 
                 break;
-
+            case 4:
+                
+                if (AMPERSAND_CH == char_class[next_ch] ) {
+                    term[i] = '\0';
+                    state = -LOGIC_TOKEN;
+                }else{
+                    ungetc( next_ch, stream );
+                    term[i-1] = '\0';      
+                    state = -LOGIC_TOKEN;
+                }
+            
+            break;
+            case 5:
+                
+                if (PIPE_CH == char_class[next_ch] ) {
+                    term[i] = '\0';
+                    state = -LOGIC_TOKEN;
+                }else
+                if (EQ_CH == char_class[next_ch] ) {
+                    term[i] = '\0';
+                    state = -ASSIGMENT_TOKEN;
+                }
+                
+                else{
+                    ungetc( next_ch, stream );
+                    term[i-1] = '\0';      
+                    state = -LOGIC_TOKEN;
+                }
+                
+                break;
+            case 6:
+                
+                if (EQ_CH == char_class[next_ch] ) {
+                    term[i] = '\0';
+                    state = -ASSIGMENT_TOKEN;
+                }else{
+                    ungetc( next_ch, stream );
+                    term[i-1] = '\0';      
+                    state = -LOGIC_TOKEN;
+                }
+                
+            break;
                 
             case 9:
                 
@@ -263,6 +295,41 @@ char *term;    /* out: the token text if the token is a term */
                 }
                 
             break;
+            case 14:
+                
+                if (LT_CH == char_class[next_ch] ) {
+                    
+                    term[i] = '\0';
+                    state = 100;
+                }else
+                    
+                    if (EQ_CH == char_class[next_ch] ) {
+                        
+                        term[i] = '\0';
+                        state = -EQ_TESTING_TOKEN;
+                }else
+                {
+                        ungetc( next_ch, stream );
+                        term[i-1] = '\0';      
+                        state = -LOGIC_TOKEN;
+                }
+                
+            break;
+                
+            case 15:
+                
+                if (EQ_CH == char_class[next_ch] ) {
+                    
+                    term[i] = '\0';
+                    state = -LOGIC_TOKEN;
+                }else
+                {
+                        ungetc( next_ch, stream );
+                        term[i-1] = '\0';      
+                        state = -ASSIGMENT_TOKEN;
+                }
+                
+            break;
                 
             // >>
             case 100:
@@ -278,6 +345,23 @@ char *term;    /* out: the token text if the token is a term */
                 }
             
             break;
+                
+            case 16:
+                
+                if (EQ_CH == char_class[next_ch] ) {
+                    
+                    term[i] = '\0';
+                    state = -ASSIGMENT_TOKEN;
+                }else
+                {
+                    ungetc( next_ch, stream );
+                    term[i-1] = '\0';
+                    state = -ARITMETIC_TOKEN;
+                }
+            
+            break;
+                
+                
                 
                 
             case 23:
@@ -378,13 +462,11 @@ char *term;    /* out: the token text if the token is a term */
     }
     
     
-    /* Part 2: Coerce the final state to return the type token */
     
     return( (TokenType) (-state) );
     
     
-} /* GetToken */
-
+} 
 
 
 
@@ -441,16 +523,11 @@ int main(int argc, char **argv, char **envp){
             break;
                 
             case DIGIT_POINT_TOKEN:
-                printf("\n %s : NUMERO", term);
+                printf("\n %s : NUMERO DECIMAL", term);
             break;
                 
-            case RGT_PAREN_TOKEN :
-            case LFT_PAREN_TOKEN :
-            case RGT_CURLYBRACKET_TOKEN :
-            case LFT_CURLYBRACKET_TOKEN :
-            case RGT_SQRBRACKET_TOKEN :
-            case LFT_SQRBRACKET_TOKEN : 
-            case COMMA_TOKEN: (void)printf ( "\n %s : Agrupación", term ); 
+            case AGRUPATION_TOKEN : 
+            case COMMA_TOKEN: (void)printf ( "\n %s : AGRUPACION", term ); 
             break;
                 
             case COLON_TOKEN:
@@ -463,36 +540,42 @@ int main(int argc, char **argv, char **envp){
             break;
                 
             case SEMICOLON_TOKEN:
-                printf("\n %s : EOS(End of Statement)", term);
+                printf("\n %s : EOS", term);
             break;
                 
             case COMENT_TOKEN:
-                printf("\n %s : Comentario", term);
+                printf("\n %s : COMENTARIO", term);
                 break;
             
+            case ARITMETIC_TOKEN:
             case ADDITION_TOKEN:
             case DIVISION_TOKEN:
-                printf("\n %s : Operacion", term);
+                printf("\n %s : OPERACION", term);
                 break;
                 
+            case ASSIGMENT_TOKEN:
             case ASIGNATION_TOKEN:
-                printf("\n %s : Asignacion", term);
+                printf("\n %s : ASIGNACION", term);
             break;
                 
             case POINTER_TOKEN:
-                printf("\n %s : Pointer", term);
+                printf("\n %s : APUNTADOR", term);
             break;
                 
             case EQ_TESTING_TOKEN:
                 printf("\n %s : Equality Testing", term);
             break;
                 
+            case LOGIC_TOKEN:
+                printf("\n %s :  LOGICO", term);
+            break;
+                
             case BITWISE_LOGIC_TOKEN:
-                printf("\n %s : Bitwise Logic", term);
+                printf("\n %s : LOGICO BITWISE", term);
             break;
                 
             case BITWISE_SHIFT_TOKEN:
-                printf("\n %s : Bitwise Shift Logic", term);
+                printf("\n %s : LOGICO BITWISE SHIFT ", term);
             break;
                 
 

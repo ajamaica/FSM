@@ -183,9 +183,9 @@ static CharClassType char_class[128] = {
     
     /*  W */  LETTER_CH,        /*  X */  LETTER_CH,        /*  Y */  LETTER_CH,
     
-    /*  Z */  LETTER_CH,        /*  [ */  LFT_SQRBRACKET_CH,/*  \ */  OTHER_CH,
+    /*  Z */  LETTER_CH,        /*  [ */  LFT_SQRBRACKET_CH,/*  \ */  LETTER_CH,
     
-    /*  ] */  RGT_SQRBRACKET_CH,/*  ^ */  CARET_CH,         /*  _ */  OTHER_CH,
+    /*  ] */  RGT_SQRBRACKET_CH,/*  ^ */  CARET_CH,         /*  _ */  LETTER_CH,
     
     /*  ` */  OTHER_CH,         /*  a */  LETTER_CH,        /*  b */  LETTER_CH,
     
@@ -290,16 +290,8 @@ typedef enum {
     
     LFT_PAREN_TOKEN = 2,    /* left parenthesis */
     
-    RGT_PAREN_TOKEN = 3,    /* right parenthesis */
-    
-    LFT_CURLYBRACKET_TOKEN = 30, /* left curly bracket */
-    
-    RGT_CURLYBRACKET_TOKEN = 31, /* right curly bracket */
-    
-    LFT_SQRBRACKET_TOKEN = 32, /* left square bracket */
-    
-    RGT_SQRBRACKET_TOKEN = 33, /* right square bracket */
-    
+    AGRUPATION_TOKEN = 3,
+        
     AND_TOKEN       = 4,    /* set intersection connective */
     
     ADDITION_TOKEN  = 9,    /* set intersection connective */
