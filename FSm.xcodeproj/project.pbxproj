@@ -26,6 +26,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		069C8446150D66750070C0E7 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
+		069C8448150D7DBA0070C0E7 /* TABLA_LL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TABLA_LL.txt; sourceTree = "<group>"; };
 		06B2521814E7802B0066C1B3 /* FSm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FSm; sourceTree = BUILT_PRODUCTS_DIR; };
 		06B2521C14E7802B0066C1B3 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		06B2521E14E7802B0066C1B3 /* FSm.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = FSm.1; sourceTree = "<group>"; };
@@ -63,10 +65,12 @@
 		06B2521B14E7802B0066C1B3 /* FSm */ = {
 			isa = PBXGroup;
 			children = (
+				069C8448150D7DBA0070C0E7 /* TABLA_LL.txt */,
 				06EADF4414E845D700BABBA5 /* File.c */,
 				06B2521C14E7802B0066C1B3 /* main.c */,
 				06B2521E14E7802B0066C1B3 /* FSm.1 */,
 				7ED0A64714E84A5E00DE7E0C /* header.h */,
+				069C8446150D66750070C0E7 /* Token.h */,
 			);
 			path = FSm;
 			sourceTree = "<group>";
