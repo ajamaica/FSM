@@ -11,6 +11,7 @@
 		06B2521F14E7802B0066C1B3 /* FSm.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06B2521E14E7802B0066C1B3 /* FSm.1 */; };
 		06D171151511D17C00AEEFB1 /* stack_MemoriaDinamica.c in Sources */ = {isa = PBXBuildFile; fileRef = 06D171141511D17C00AEEFB1 /* stack_MemoriaDinamica.c */; };
 		06EADF4514E845D700BABBA5 /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = 06EADF4414E845D700BABBA5 /* File.c */; };
+		06F65A1715125E7500B67A23 /* Parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 06F65A1615125E7500B67A23 /* Parser.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,7 @@
 		06B2521E14E7802B0066C1B3 /* FSm.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = FSm.1; sourceTree = "<group>"; };
 		06D171141511D17C00AEEFB1 /* stack_MemoriaDinamica.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stack_MemoriaDinamica.c; sourceTree = "<group>"; };
 		06EADF4414E845D700BABBA5 /* File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = File.c; sourceTree = "<group>"; };
+		06F65A1615125E7500B67A23 /* Parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Parser.c; sourceTree = "<group>"; };
 		7ED0A64714E84A5E00DE7E0C /* header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = header.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 		06B2521B14E7802B0066C1B3 /* FSm */ = {
 			isa = PBXGroup;
 			children = (
+				06F65A1615125E7500B67A23 /* Parser.c */,
 				069C8448150D7DBA0070C0E7 /* TABLA_LL.txt */,
 				06EADF4414E845D700BABBA5 /* File.c */,
 				06D171141511D17C00AEEFB1 /* stack_MemoriaDinamica.c */,
@@ -131,6 +134,7 @@
 				06B2521D14E7802B0066C1B3 /* main.c in Sources */,
 				06EADF4514E845D700BABBA5 /* File.c in Sources */,
 				06D171151511D17C00AEEFB1 /* stack_MemoriaDinamica.c in Sources */,
+				06F65A1715125E7500B67A23 /* Parser.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
