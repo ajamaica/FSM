@@ -12,9 +12,8 @@
 //        F
 //        X
 //        P
-
+/*
 #include "header.h"
-#include <stdio.h>
 
 void parser(){
     char * matriz[8][8];
@@ -42,13 +41,5 @@ void parser(){
             }
         }
 	}
-    
-	/*
-     for(i = 0; i < 8; i++){
-     for(j = 0; j < 8; j++){
-     printf("%s ", matriz[i][j]);
-     }
-     printf("\n");
-     }
-     */
 }
+*/

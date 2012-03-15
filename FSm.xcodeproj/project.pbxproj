@@ -36,6 +36,7 @@
 		06D171141511D17C00AEEFB1 /* stack_MemoriaDinamica.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stack_MemoriaDinamica.c; sourceTree = "<group>"; };
 		06EADF4414E845D700BABBA5 /* File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = File.c; sourceTree = "<group>"; };
 		06F65A1615125E7500B67A23 /* Parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Parser.c; sourceTree = "<group>"; };
+		7ECEEC1615126E35001564EA /* File2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = File2; sourceTree = "<group>"; };
 		7ED0A64714E84A5E00DE7E0C /* header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = header.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +78,7 @@
 				06B2521E14E7802B0066C1B3 /* FSm.1 */,
 				7ED0A64714E84A5E00DE7E0C /* header.h */,
 				069C8446150D66750070C0E7 /* Token.h */,
+				7ECEEC1615126E35001564EA /* File2 */,
 			);
 			path = FSm;
 			sourceTree = "<group>";

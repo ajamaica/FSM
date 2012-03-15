@@ -1,12 +1,12 @@
 #include "Token.h"
-#include "stack_MemoriaDinamica.c"
+//#include "stack_MemoriaDinamica.c"
 
 int main(int argc, char const *argv[]){
-    struct stack mi_stack;
+    //struct stack mi_stack;
     
-    init(&mi_stack);
+    //init(&mi_stack);
     
-    if(argc == 2){
+    if(argc == 1){
         
         TokenT token;       /* next token in the input stream */
         
@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]){
         
         int fd_output;      /* File Descriptor for Output File */
         
-        if((stream = fopen(argv[1],"r")) == NULL){
+        if((stream = fopen("File2","r")) == NULL){
             fprintf(stderr, "El archivo %s no existe o no se puede abrir\n", argv[1]);
         }
         
@@ -60,81 +60,16 @@ int main(int argc, char const *argv[]){
                     tipo = "Numero";
                     printf("\n %s : NUMERO", term);
                     break;
-                    
-                case DIGIT_POINT_TOKEN:
-                    tipo = "Numero Decimal";
-                    printf("\n %s : NUMERO DECIMAL", term);
-                    break;
-                    
-                case AGRUPATION_TOKEN : 
-                case COMMA_TOKEN: (void)printf ( "\n %s : AGRUPACION", term ); 
+                
+                case AGRUPATION_TOKEN :
+                    printf ( "\n %s : AGRUPACION", term ); 
                     tipo = "Agrupacion";
-                    break;
-                    
-                case COLON_TOKEN:
-                case QUESTION_TOKEN:
-                    tipo = "Condicional";
-                    printf("\n %s : CONDICIONAL", term);
-                    break;
-                    
-                case TILDE_TOKEN:
-                    tipo = "Destructor";
-                    printf("\n %s : DESTRUCTOR", term);
-                    break;
-                    
-                case SEMICOLON_TOKEN:
-                    tipo = "EOS (End Of Statement)";
-                    printf("\n %s : EOS", term);
-                    break;
-                    
-                case COMENT_TOKEN:
-                    tipo = "Comentario";
-                    printf("\n %s : COMENTARIO", term);
-                    break;
-                    
-                case ARITMETIC_TOKEN:
-                case ADDITION_TOKEN:
-                case DIVISION_TOKEN:
-                    tipo = "Operacion";
-                    printf("\n %s : OPERACION", term);
-                    break;
-                    
-                case ASSIGMENT_TOKEN:
-                case ASIGNATION_TOKEN:
-                    tipo = "Asignacion";
-                    printf("\n %s : ASIGNACION", term);
-                    break;
-                    
-                case POINTER_TOKEN:
-                    tipo = "Apuntador";
-                    printf("\n %s : APUNTADOR", term);
-                    break;
-                    
-                case EQ_TESTING_TOKEN:
-                    tipo = "Equality Testing";
-                    printf("\n %s : Equality Testing", term);
-                    break;
-                    
-                case LOGIC_TOKEN:
-                    tipo = "Operado Logico";
-                    printf("\n %s :  LOGICO", term);
-                    break;
-                    
-                case BITWISE_LOGIC_TOKEN:
-                    tipo = "Operador Logico Bitwise";
-                    printf("\n %s : LOGICO BITWISE", term);
                     break;
                     
                 case STRING_TOKEN:
                     tipo = "String";
                     printf("\n %s : STRING TOKEN", term);
                     break;
-                    
-                case BITWISE_SHIFT_TOKEN:
-                    tipo = "Operado Logico Bitwise de Shift";
-                    printf("\n %s : LOGICO BITWISE SHIFT ", term);
-                    break;
-                    
                     
                 default :
                     //(void)printf ("Error"); 

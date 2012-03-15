@@ -10,6 +10,10 @@
 
 
 char PALABRAS_RESERVADAS[][15] = {
+    "y",
+    "o",
+    "no"
+    /*
     "auto",		
     "break",			
     "case",			
@@ -41,7 +45,8 @@ char PALABRAS_RESERVADAS[][15] = {
     "unsigned",		
     "void",			
     "volatile",		
-    "while"			
+    "while"
+     */
 };
 
 int isReservedWord(char term[128]){
@@ -67,53 +72,7 @@ typedef enum {
     
     RGT_PAREN_CH,       /* ) */
     
-    LFT_CURLYBRACKET_CH,/* } */
-    
-    RGT_CURLYBRACKET_CH,/* { */
-    
-    LFT_SQRBRACKET_CH,  /* [ */
-    
-    RGT_SQRBRACKET_CH,  /* ] */
-    
-    AMPERSAND_CH,       /* & */
-    
-    HYPHENMINUS_CH,     /* - */
-
-    ADDITION_CH,        /* + */
-    
     STAR_CH,            /* * */
-    
-    SLASH_CH,           /* / */
-
-    GT_CH,              /* > */
-    
-    LT_CH,              /* < */
-
-    EQ_CH,              /* = */
-    
-    PERCENTAGE_CH,      /* % */
-    
-    COMMA_CH,           /* , */
-    
-    SEMICOLON_CH,       /* ; */
-
-    COLON_CH,           /* : */
-    
-    TILDE_CH,           /* ~ */
-    
-    PIPE_CH,            /* | */
-    
-    EXCLAMATION_CH,     /* ! */
-    
-    QUESTION_CH,        /* ? */
-    
-    NUMBERSIGN_CH,      /* # */
-    
-    POINT_CH,           /* . */
-    
-    QUOTATION_CH,       /* ""'' */
-
-    CARET_CH,           /* ^ */
     
     EOS_CH,             /* \0 */
     
@@ -147,15 +106,15 @@ static CharClassType char_class[128] = {
     
     /* ^^ */  OTHER_CH,         /* ^_ */  OTHER_CH,         /*    */  WHITE_CH,
     
-    /*  ! */  EXCLAMATION_CH,   /*  " */  QUOTATION_CH,     /*  # */  NUMBERSIGN_CH,
+    /*  ! */  OTHER_CH,   /*  " */  OTHER_CH,     /*  # */  OTHER_CH,
     
-    /*  $ */  OTHER_CH,         /*  % */  PERCENTAGE_CH,    /*  & */  AMPERSAND_CH,
+    /*  $ */  OTHER_CH,         /*  % */  OTHER_CH,    /*  & */  OTHER_CH,
     
-    /*  ' */  QUOTATION_CH,     /*  ( */  LFT_PAREN_CH,     /*  ) */  RGT_PAREN_CH,
+    /*  ' */  OTHER_CH,     /*  ( */  LFT_PAREN_CH,     /*  ) */  RGT_PAREN_CH,
     
-    /*  * */  STAR_CH,          /*  + */  ADDITION_CH,      /*  , */  COMMA_CH,
+    /*  * */  STAR_CH,          /*  + */  OTHER_CH,      /*  , */  OTHER_CH,
     
-    /*  - */  HYPHENMINUS_CH,   /*  . */  POINT_CH,         /*  / */  SLASH_CH,
+    /*  - */  OTHER_CH,   /*  . */  OTHER_CH,         /*  / */  OTHER_CH,
     
     /*  0 */  DIGIT_CH,         /*  1 */  DIGIT_CH,         /*  2 */  DIGIT_CH,
     
@@ -163,11 +122,11 @@ static CharClassType char_class[128] = {
     
     /*  6 */  DIGIT_CH,         /*  7 */  DIGIT_CH,         /*  8 */  DIGIT_CH,
     
-    /*  9 */  DIGIT_CH,         /*  : */  COLON_CH,         /*  ; */  SEMICOLON_CH,
+    /*  9 */  DIGIT_CH,         /*  : */  OTHER_CH,         /*  ; */  OTHER_CH,
     
-    /*  < */  LT_CH,            /*  = */  EQ_CH,            /*  > */  GT_CH,
+    /*  < */  OTHER_CH,            /*  = */  OTHER_CH,            /*  > */  OTHER_CH,
     
-    /*  ? */  QUESTION_CH,      /*  @ */  OTHER_CH,         /*  A */  LETTER_CH,
+    /*  ? */  OTHER_CH,      /*  @ */  OTHER_CH,         /*  A */  LETTER_CH,
     
     /*  B */  LETTER_CH,        /*  C */  LETTER_CH,        /*  D */  LETTER_CH,
     
@@ -185,9 +144,9 @@ static CharClassType char_class[128] = {
     
     /*  W */  LETTER_CH,        /*  X */  LETTER_CH,        /*  Y */  LETTER_CH,
     
-    /*  Z */  LETTER_CH,        /*  [ */  LFT_SQRBRACKET_CH,/*  \ */  LETTER_CH,
+    /*  Z */  LETTER_CH,        /*  [ */  OTHER_CH,/*  \ */  LETTER_CH,
     
-    /*  ] */  RGT_SQRBRACKET_CH,/*  ^ */  CARET_CH,         /*  _ */  LETTER_CH,
+    /*  ] */  LETTER_CH,/*  ^ */  OTHER_CH,         /*  _ */  LETTER_CH,
     
     /*  ` */  OTHER_CH,         /*  a */  LETTER_CH,        /*  b */  LETTER_CH,
     
@@ -207,7 +166,7 @@ static CharClassType char_class[128] = {
     
     /*  x */  LETTER_CH,        /*  y */  LETTER_CH,        /*  z */  LETTER_CH,
     
-    /*  { */  LFT_CURLYBRACKET_CH,/*  | */  PIPE_CH,        /*  } */  RGT_CURLYBRACKET_CH,
+    /*  { */  OTHER_CH,/*  | */  OTHER_CH,        /*  } */  OTHER_CH,
     
     /*   */  OTHER_CH,          /* ^? */  OTHER_CH,                           
 
@@ -293,64 +252,14 @@ typedef enum {
     LFT_PAREN_TOKEN = 2,    /* left parenthesis */
     
     AGRUPATION_TOKEN = 3,
-        
-    AND_TOKEN       = 4,    /* set intersection connective */
     
-    OR_TOKEN        = 5,    /* set union connective */
-    
-    NOT_TOKEN       = 6,    /* set difference connective */
-    
-    END_TOKEN       = 7,    /* end of the query */
+    END_TOKEN       = 4,    /* end of the query */
     
     NO_TOKEN        = 8,    /* the token is not recognized */
     
-    ADDITION_TOKEN  = 9,    /* set intersection connective */
-    
-    SUSTRACTION_TOKEN = 10, /* - */
-    
     STAR_TOKEN = 11, /* * */
     
-    DIVISION_TOKEN = 12, /* / */
-    
-    ASIGNATION_TOKEN = 13, /* - */
-    
     DIGIT_TOKEN      = 25,    /* a search term */
-    
-    DIGIT_POINT_TOKEN      = 26,    /* a search term */
-    
-    QUESTION_TOKEN = 27,       /* ? */
-    
-    SEMICOLON_TOKEN = 18,        /* End Of Statement */
-    
-    TILDE_TOKEN = 19,        /* End Of Statement */
-    
-    COLON_TOKEN = 20,        /* End Of Statement */
-    
-    COMMA_TOKEN = 17,           /* comma */
-    
-    ELIPSIS_TOKEN = 28,           /* comma */
-    
-    COMENT_TOKEN = 29,        /* comma */
-    
-    POINTER_TOKEN = 34,          /* comma */
-    
-    LOGIC_TOKEN = 35,          /* comma */
-
-    ARITMETIC_TOKEN = 36,
-    
-    ASSIGMENT_TOKEN = 37,
-    
-    AUGMENTED_TOKEN = 38,
-    
-    BITWISE_LOGIC_TOKEN = 39,
-    
-    BITWISE_SHIFT_TOKEN = 40,
-    
-    CONDICIONAL_TOKEN = 41,
-    
-    EQ_TESTING_TOKEN = 42,
-    
-    ORDER_RELATIONS_TOKEN  = 43,
     
     STRING_TOKEN  = 44
 

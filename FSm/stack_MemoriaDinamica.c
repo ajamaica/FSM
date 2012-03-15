@@ -1,3 +1,4 @@
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -59,4 +60,4 @@ void pop(struct stack *s){
     
     free(p);
 }
-
+*/

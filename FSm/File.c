@@ -1,4 +1,4 @@
-
+/*
 int a, b;
 
 int funcion(){
@@ -11,3 +11,5 @@ int funcion(){
     
     return 0;
 }
+
+*/
