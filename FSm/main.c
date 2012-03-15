@@ -1,6 +1,10 @@
 #include "Token.h"
+#include "stack_MemoriaDinamica.c"
 
 int main(int argc, char const *argv[]){
+    struct stack mi_stack;
+    
+    init(&mi_stack);
     
     if(argc == 2){
         

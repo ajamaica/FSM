@@ -60,21 +60,3 @@ void pop(struct stack *s){
     free(p);
 }
 
-int main (int argc, char const *argv[]){
-    int i;
-    struct stack mi_stack;
-    
-    init(&mi_stack);
-    for(i = 0; i < 10; i++){
-        printf("Agregando %i\n", i);
-        push(&mi_stack, i);
-    }
-    
-    printf("\nis_empty? %i\n\n", is_empty(&mi_stack));
-    for(; i > 0; i--){
-        printf("El elemento tope es %i\n", top(&mi_stack));
-        pop(&mi_stack);
-    }
-
-    return 0;
-}
